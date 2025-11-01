@@ -1,24 +1,29 @@
-import Header from "./components/header";
-import Song from "./components/song";
+import Header from "./components/Header/index.js";
+import SongMain from "./components/SongMain/index.js";
+import ArtistList from "./components/ArtistList/index.js";
+import PlaylistList from "./components/PlaylistList/index.js";
+import { useState } from 'react';
 import './styles/app.css';
 //Importar imagenes de las canciones
-import song1_img from './img/song1.jpg';
-import song2_img from './img/song2.jpg';
-import song3_img from './img/song3.jpg';
-import song4_img from './img/song4.jpg';
 //Importar imagenes de los artistas
-import artist1_img from './img/theweeknd.jpg';
-import artist2_img from './img/daftpunk.jpg';
-import artist3_img from './img/bbnos.jpg';
-import artist4_img from './img/siames.jpg';
-import artist5_img from './img/coldplay.jpg';
-import artist6_img from './img/esteman.jpg';
+
 //Importar iconos
-import mas from './img/mas.png';
-import expandir from './img/expandir.png';
-import close from './img/x.png';
+import mas from './Assets/mas.png';
+import expandir from './Assets/expandir.png';
+import close from './Assets/x.png';
 
 function App() {
+  const [activePanel, setActivePanel] = useState(null);
+  const togglePanel = (panel) => setActivePanel(prev => (prev === panel ? null : panel));
+  const [showLibrary, setShowLibrary] = useState(true);
+  const [showSearchResults, setShowSearchResults] = useState(true);
+  const toggleLibrary = () => setShowLibrary(v => !v);
+  const toggleSearchResults = () => setShowSearchResults(v => !v);
+  const toggleSection = (section) => {
+    if (section === 'library') toggleLibrary();
+    if (section === 'search') toggleSearchResults();
+  }
+
   return (
     <div>
       <Header />
@@ -32,45 +37,24 @@ function App() {
                     <img className="main_library_expand" src={expandir} alt=""/>
                 </div>                
             </div>
-            <div className="main_library-buttons">
-                <button className="main_library-buttons-close"><img className="close-img" src={close} alt="logo para cerrar"/></button>
-                <button className="main_library-buttons-choose">Artistas</button>
-            </div>
-            <div className="main_library-artists">
-                <div className="main_library-artist">
-                    <img className="main_library-artist-img" src={artist1_img} alt=""/>
-                    <p className="main_library-artist-name">The Weeknd</p>
-                </div>
-                <div className="main_library-artist">
-                    <img className="main_library-artist-img" src={artist2_img} alt=""/>
-                    <p className="main_library-artist-name">bbno$</p>
-                </div>
-                <div className="main_library-artist">
-                    <img className="main_library-artist-img" src={artist3_img} alt=""/>
-                    <p className="main_library-artist-name">Daft Punk</p>
-                </div>
-                <div className="main_library-artist">
-                    <img className="main_library-artist-img" src={artist4_img} alt=""/>
-                    <p className="main_library-artist-name">SIAMES</p>
-                </div>
-                <div className="main_library-artist">
-                    <img className="main_library-artist-img" src={artist5_img} alt=""/>
-                    <p className="main_library-artist-name">Coldplay</p>
-                </div>
-                <div className="main_library-artist">
-                    <img className="main_library-artist-img" src={artist6_img} alt=""/>
-                    <p className="main_library-artist-name">Esteman</p>
-                </div>
-                
-            </div>
+      <div className="main_library-buttons">
+        <button className="main_library-buttons-close"><img className="close-img" src={close} alt="logo para cerrar"/></button>
+        <button className={`main_library-buttons-choose ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</button>
+        <button className={`main_library-buttons-choose ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</button>
+      </div>
+            {activePanel === 'artists' && (
+              <div className="main_library-panel">
+                <ArtistList />
+              </div>
+            )}
+            {activePanel === 'playlists' && (
+              <div className="main_library-panel">
+                <PlaylistList onToggleSection={toggleSection} />
+              </div>
+            )}
 
         </div>
-        <div className="songs_container">
-          <Song image={song1_img} title="Open Hearts" artist="The Weeknd" album="Hurry Up Tomorrow" duration="3:54" />
-          <Song image={song2_img} title="Digital Love" artist="Daft Punk" album="Discovery" duration="5:01" />
-          <Song image={song3_img} title="Gigolo" artist="bbno$" album="gigolo" duration="1:58" />
-          <Song image={song4_img} title="Golden" artist="HUNTR/X" album="Golden" duration="3:15" />
-        </div>
+          <SongMain showLibrary={showLibrary} showSearchResults={showSearchResults} />
       </div>
     </div>
   );

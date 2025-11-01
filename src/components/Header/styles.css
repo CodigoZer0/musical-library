@@ -1,0 +1,16 @@
+.header{
+    width: 35%;
+    display: flex;
+    margin: 0 30%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    box-sizing: border-box;
+    gap: 20px;
+
+}
+.header_img{
+    width: 80px;
+    height: auto;
+    margin-top: -9px;
+}
