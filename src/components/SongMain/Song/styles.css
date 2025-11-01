@@ -1,0 +1,77 @@
+.song{
+    display: grid;
+    grid-template-columns: 10rem 1.2fr 1fr 1fr 0.7fr 0.7fr;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #353535;
+    box-sizing: border-box;
+    gap: 20px;
+}
+.song_image{
+    width: 8rem;
+    height: auto;
+    border-radius: 5px;
+}
+.song_title{
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin: 0;
+}
+.song_artist, .song_album, .song_duration{
+    font-size: 1rem;
+    color: #ffffff;
+    margin: 0;
+}
+.song_add{
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+.add_button{
+    width: 20px;
+    height: 20px;
+}
+.song_add-container {
+    position: relative; /* ¡CLAVE! Permite que el tooltip flote en relación a este DIV. */
+    display: inline-block;
+    width: fit-content;
+}
+
+/*
+ * 2. Estilos y Ocultamiento del Tooltip
+ */
+.tooltip-text {
+    /* Posicionamiento Flotante */
+    position: absolute;
+    z-index: 10; /* Asegura que flote por encima de otros elementos */
+
+    /* Posición (Aparece ARRIBA y CENTRADO del botón) */
+    bottom: 100%; /* Lo mueve justo por encima del borde superior del contenedor. */
+    left: 50%;
+    transform: translateX(-50%); /* Lo centra horizontalmente. */
+    margin-bottom: 5px; /* Pequeño espacio entre el botón y el tooltip. */
+
+    /* Estilos Visuales (Similar a la imagen que enviaste) */
+    background-color: #333; /* Fondo oscuro */
+    color: #fff; /* Texto blanco */
+    padding: 6px 12px;
+    border-radius: 4px;
+    white-space: nowrap; /* Evita que el texto se rompa en varias líneas */
+    font-size: 14px;
+
+    /* Ocultamiento por Defecto */
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s; /* Transición suave para la aparición */
+}
+
+/*
+ * 3. Aparición al Pasar el Ratón
+ * Cuando el ratón está sobre el contenedor, el texto del tooltip se hace visible.
+ */
+.song_add-container:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}

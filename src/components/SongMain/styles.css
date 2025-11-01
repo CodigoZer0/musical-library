@@ -1,0 +1,15 @@
+.songs_main{
+    background-color: #121212;
+    width: 66%;
+    height: 90%;
+    min-height: 850px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 20px;
+    box-sizing: border-box;
+    padding: 0px 10px;
+    
+}
