@@ -1,10 +1,28 @@
 import './styles.css';
 import add from './../../../Assets/boton-agregar-hover.png'
-//import added from './../../../Assets/ok.png';
+import { useState } from 'react';
+
 const Song = ({ key, image, title, artist, album, duration, added, onToggleSaved, hideControls }) => {
+    const [imageError, setImageError] = useState(false);
+
+    const handleImageError = () => {
+        setImageError(true);
+    };
+
     return (
         <section className="song" key={key}>
-            <img src={image} alt={title} className="song_image" />
+            <div className="song_image_container">
+                {image && !imageError ? (
+                    <img 
+                        src={image} 
+                        alt={title} 
+                        className="song_image"
+                        onError={handleImageError}
+                    />
+                ) : (
+                    <div className="song_image_placeholder">No imagen</div>
+                )}
+            </div>
             <h2 className="song_title">{title}</h2>
             <p className="song_artist">{artist} </p>
             <p className="song_album">{album}</p>

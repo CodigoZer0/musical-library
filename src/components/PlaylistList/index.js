@@ -1,11 +1,12 @@
 import React from 'react';
 import './styles.css';
+import { Link } from 'react-router-dom';
 
 const PlaylistList = ({ playlists = [], onToggleSection }) => {
   // cada playlist tiene un target para controlar qué sección abrir/toggle
   const fallback = [
-    { id: 'p1', name: 'Canciones guardadas', target: 'library' },
-    { id: 'p2', name: 'Busquedas recientes', target: 'search' },
+    { id: 'p1', name: 'Canciones guardadas', target: '/your_playlist' },
+    { id: 'p2', name: 'Busquedas recientes', target: '/' },
     
   ];
   const list = playlists.length ? playlists : fallback;
@@ -17,7 +18,7 @@ const PlaylistList = ({ playlists = [], onToggleSection }) => {
         {list.map(p => (
           <li key={p.id} className="playlist_item">
             {/* al clicar el nombre togglea la sección indicada (library | search) */}
-            <button type="button" className="playlist_name" onClick={() => onToggleSection && onToggleSection(p.target)}>{p.name}</button>
+            <Link  className="playlist_name" to={p.target}>{p.name}</Link>
           </li>
         ))}
       </ul>
