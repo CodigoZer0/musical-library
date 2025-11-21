@@ -1,0 +1,55 @@
+.top_music-album {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 10px 0px;
+  gap: 20px;
+}
+
+.top_music-album-cover {
+  width: 100px;
+  padding: 0px 10px;
+}
+
+.song-name {
+  width: 70%;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  font-size: 2rem;
+}
+
+.song-name-name {
+  font-weight: 600;
+  color: #fff;
+  font-family: "Anton", sans-serif;
+  margin: 5px 0;
+}
+
+.song-name-name:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.song-name-artist {
+  font-weight: 500;
+  font-size: 1.3rem;
+  color: #b3b3b3;
+  font-family: "Anton", sans-serif;
+  margin: 5px 0;
+}
+
+.song-info {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 200px;
+  flex-direction: row;
+}
+
+.song-info-duration {
+  align-self: flex-end;
+  text-align: start;
+  font-size: 20px;
+}

@@ -4,40 +4,6 @@ html{
     background-color: #000000;
     color: #ffffff;
 }
-
-
-
-/*.songs_container{
-    background-color: #121212;
-    width: 66%;
-    height: 90%;
-    min-height: 850px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: start;
-    gap: 20px;
-    box-sizing: border-box;
-    padding: 0px 10px;
-    margin-top: 4px;
-}
-.song{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    width: 50%;
-    border-bottom: 1px solid #353535;
-    box-sizing: border-box;
-}
-.song_image{
-    width: 10rem;
-    height: auto;
-    border-radius: 5px;
-}*/
 .main{
     width: 100%;
     display: flex;

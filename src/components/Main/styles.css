@@ -41,11 +41,12 @@ html{
 .main{
     width: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     margin-top: 20px;
 }
 .main_section{
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

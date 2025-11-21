@@ -44,6 +44,7 @@ html{
     justify-content: center;
     align-items: center;
     margin-top: 20px;
+    box-sizing: border-box;
 }
 .main_section{
     display: flex;
@@ -76,6 +77,7 @@ html{
   width: 100%;
   font-weight: 500;
   padding: 5px 20px;
+  box-sizing: border-box;
 }
 .main_library-create {
   display: flex;
@@ -182,4 +184,92 @@ html{
   background-color: #333333;
   transition: 0.3s;
   border-radius: 10px;
+}
+
+/* Album View Styles */
+.album_view {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+  margin: 4px;
+  box-sizing: border-box;
+  width: 66%;
+  background-color: #121212;
+  color: #fff;
+  border-radius: 10px;
+  height: 847px;
+  overflow-y: auto;
+  flex-shrink: 0;
+}
+
+.album_header_section {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+  background-color: #058816a8;
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 280px;
+  border-radius: 10px;
+  flex-shrink: 0;
+}
+
+.album_header_content {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding: 0 20px;
+  font-weight: 500;
+  font-size: 72px;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.album_cover_img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  margin-right: 20px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.album_header_info {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  height: 100%;
+  padding-bottom: 15px;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.album_header_info h2 {
+  margin: 0;
+  font-size: 36px;
+  color: #fff;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album_artist_name {
+  margin: 5px 0 0 0;
+  font-size: 18px;
+  color: #b3b3b3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.album_year_info {
+  margin: 3px 0 0 0;
+  font-size: 14px;
+  color: #b3b3b3;
 }
