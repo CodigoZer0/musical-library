@@ -1,6 +1,6 @@
 import Song from "../Song";
 import { useState, useEffect } from "react";
-import "./styles.css"
+import { SearchSongsContainer, SearchSongsTitle, SearchSongsTopic } from "./styles";
 
 const SearchResults = ({ songs, savedSongs = [], onToggleSaved }) => {
     const [recentSearches, setRecentSearches] = useState([]);
@@ -56,14 +56,14 @@ const SearchResults = ({ songs, savedSongs = [], onToggleSaved }) => {
 
     return(
         <>
-           <p className="songs_title">Tus busquedas recientes</p>
-          <div className="songs_topic">
+           <SearchSongsTitle>Tus busquedas recientes</SearchSongsTitle>
+          <SearchSongsTopic>
             <p>Cancion</p>
             <p>Artista</p>
             <p>Album</p>
             <p>Duracion</p>
-          </div>
-          <div className="songs_container">
+          </SearchSongsTopic>
+          <SearchSongsContainer>
              {displaySongs && displaySongs.length > 0 ? (
                 displaySongs.map(song => {
                     const added = savedSongs.some(s => (s.key === song.key || s.key === song.idTrack) || (s.idTrack === song.idTrack || s.idTrack === song.key));
@@ -83,7 +83,7 @@ const SearchResults = ({ songs, savedSongs = [], onToggleSaved }) => {
              ) : (
                 <p className="no_songs">No hay búsquedas recientes</p>
              )}
-          </div>
+          </SearchSongsContainer>
         </>
     )
 }

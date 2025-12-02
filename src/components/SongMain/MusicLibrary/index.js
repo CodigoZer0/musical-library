@@ -1,17 +1,18 @@
 import Song from "./../Song";
-import "./styles.css";
+import { LibrarySongsTitle, LibrarySongsTopic, LibrarySongsContainer } from "./styles";
+
 
 const MusicLibrary = ({ songs, onToggleSaved }) => {
     return(
         <>
-           <p className="songs_title">Tus canciones guardadas</p>
-          <div className="songs_topic">
+           <LibrarySongsTitle>Tus canciones guardadas</LibrarySongsTitle>
+          <LibrarySongsTopic>
             <p>Cancion</p>
             <p>Artista</p>
             <p>Album</p>
             <p>Duracion</p>
-          </div>
-          <div className="songs_container">
+          </LibrarySongsTopic>
+          <LibrarySongsContainer>
             {songs.map ((song) => {
                 const { key, image, title, artist, album, duration } = song;
                 return (
@@ -29,7 +30,7 @@ const MusicLibrary = ({ songs, onToggleSaved }) => {
                   />
                 );
             })}
-          </div>
+          </LibrarySongsContainer>
         </>
     )
 }

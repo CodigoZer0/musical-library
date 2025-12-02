@@ -1,12 +1,11 @@
-import React from 'react';
 import Artist from './Artist';
-import "./styles.css"
 import artist1_img from './../../Assets/theweeknd.jpg';
 import artist2_img from './../../Assets/daftpunk.jpg';
 import artist3_img from './../../Assets/bbnos.jpg';
 import artist4_img from './../../Assets/siames.jpg';
 import artist5_img from './../../Assets/coldplay.jpg';
 import artist6_img from './../../Assets/esteman.jpg';
+import { ArtistListArtist, ArtistListLibrary } from './styles';
 
 const ArtistList = () => {
     const artists = [
@@ -18,15 +17,15 @@ const ArtistList = () => {
         { index: 6, imgSrc: artist6_img, name: "Esteman" },
     ]
     return (
-        <section className="main_library-artists">
+        <ArtistListLibrary>
             {
                 artists.map(artist => (
-                  <div className='main_library-artist'>
+                  <ArtistListArtist>
                     <Artist imgSrc={artist.imgSrc} name={artist.name} />
-                  </div>  
+                  </ArtistListArtist>  
                 ))
             }
-        </section>
+        </ArtistListLibrary>
     )
 }
 export default ArtistList;

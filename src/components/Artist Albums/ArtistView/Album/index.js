@@ -1,11 +1,11 @@
-import './styles.css';
+import { AlbumSongInfo, AlbumSongInfoYear, AlbumSongName, AlbumSongNameArtist, AlbumSongNameName, AlbumTopMusicAlbum, AlbumTopMusicAlbumCover } from './styles';
 import { useNavigate } from 'react-router-dom';
 
 const Album = ({ album, artist }) => { 
     const navigate = useNavigate();
 
     if (!album) {
-        return <div className="top_music-album">No hay datos del álbum</div>;
+        return <AlbumTopMusicAlbum>No hay datos del álbum</AlbumTopMusicAlbum>;
     }
 
     const handleAlbumClick = () => {
@@ -24,23 +24,22 @@ const Album = ({ album, artist }) => {
     };
 
     return(
-        <div className="top_music-album" onClick={handleAlbumClick}>
+        <AlbumTopMusicAlbum onClick={handleAlbumClick}>
             {album.strAlbumThumb && (
-                <img 
+                <AlbumTopMusicAlbumCover 
                     className="top_music-album-cover" 
                     src={album.strAlbumThumb} 
                     alt={album.strAlbum}
                 />
             )}
-            <div className="song-name">
-                <p className="song-name-name">{album.strAlbum}</p>
-                <p className="song-name-artist">{album.strArtist}</p>
-            </div>
-            <div className="song-info">
-                <p className="song-info-played">Año: {album.intYearReleased}</p>
-
-            </div> 
-        </div>
+            <AlbumSongName>
+                <AlbumSongNameName>{album.strAlbum}</AlbumSongNameName>
+                <AlbumSongNameArtist>{album.strArtist}</AlbumSongNameArtist>
+            </AlbumSongName>
+            <AlbumSongInfo>
+                <AlbumSongInfoYear>Año: {album.intYearReleased}</AlbumSongInfoYear>
+            </AlbumSongInfo>
+        </AlbumTopMusicAlbum>
     );
 }
 export default Album;

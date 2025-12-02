@@ -6,7 +6,8 @@ import mas from '../../Assets/mas.png';
 import expandir from '../../Assets/expandir.png';
 import close from '../../Assets/x.png';
 import { useState } from 'react';
-import './styles.css';
+
+import { MainContainer, MainLibraryButtons, MainLibraryButtonsChoose, MainLibraryButtonsClose, MainLibraryCreate, MainLibraryCreateButton, MainLibraryExpand, MainLibraryHeader, MainLibraryPanel, MainPlaylistSection } from "./styles";
 
 const Main = ({ onToggleSection }) => {
   const [activePanel, setActivePanel] = useState(null);
@@ -22,40 +23,38 @@ const Main = ({ onToggleSection }) => {
   return (
     <div>
       <Header />
-    <div className="main"> 
-      <div className="playlist_section">
-        <div className="main_library-header">
+    <MainContainer> 
+      <MainPlaylistSection>
+        <MainLibraryHeader>
           <p>Tu biblioteca</p>
-            <div className="main_library-create">
-              <button className="create_button"><img className="create_button-icon" src={mas} alt=""/>Crear</button>
-              <img className="main_library_expand" src={expandir} alt=""/>
-            </div>                
-        </div>
-        <div className="main_library-buttons">
-          <button className="main_library-buttons-close"><img className="close-img" src={close} alt="logo para cerrar"/></button>
-          <button className={`main_library-buttons-choose ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</button>
-          <button className={`main_library-buttons-choose ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</button>
-        </div>
+            <MainLibraryCreate>
+              <MainLibraryCreateButton><img className="create_button-icon" src={mas} alt=""/>Crear</MainLibraryCreateButton>
+              <MainLibraryExpand src={expandir} alt=""/>
+            </MainLibraryCreate>                
+        </MainLibraryHeader>
+        <MainLibraryButtons>
+          <MainLibraryButtonsClose><img className="close-img" src={close} alt="logo para cerrar"/></MainLibraryButtonsClose>
+          <MainLibraryButtonsChoose className={`${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</MainLibraryButtonsChoose>
+          <MainLibraryButtonsChoose className={`${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</MainLibraryButtonsChoose>
+        </MainLibraryButtons>
               {activePanel === 'artists' && (
-                <div className="main_library-panel">
+                <MainLibraryPanel>
                   <ArtistList />
-                </div>
+                </MainLibraryPanel>
               )}
               {activePanel === 'playlists' && (
-                <div className="main_library-panel">
+                <MainLibraryPanel>
                   <PlaylistList onToggleSection={onToggleSection} />
-                </div>
+                </MainLibraryPanel>
               )}
-          </div>
-            <div className="main_section">
+          </MainPlaylistSection>
               <SongMain 
                 showLibrary={false} 
                 showSearchResults={true}
                 onSaveSong={handleSaveSong}
                 storageKey="mainSavedSongs"
               />
-            </div>
-      </div> 
+      </MainContainer> 
     </div>
   );
 }

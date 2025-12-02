@@ -1,17 +1,16 @@
 import Header from "../Header";
-import SongMain from "../SongMain/";
 import ArtistList from "../ArtistList";
 import PlaylistList from "../PlaylistList";
 import { useState } from 'react';
-import './styles.css';
-//Importar imagenes de las canciones
-//Importar imagenes de los artistas
 
 //Importar iconos
 import mas from '../../Assets/mas.png';
 import expandir from '../../Assets/expandir.png';
 import close from '../../Assets/x.png';
 import ArtistView from "./ArtistView";
+import { ArtistAlbumsMainCreateButton, ArtistAlbumsMainLibraryButtonChoose, ArtistAlbumsMainLibraryButtons, ArtistAlbumsMainLibraryCreate, ArtistAlbumsMainLibraryExpand, ArtistAlbumsMainLibraryHeader, ArtistAlbumsMainLibraryPanel, ArtistAlbumsMainSection, ArtistAlbumsPlaylistSection } from "./styles";
+import { ChoosenMainLibraryButtonClose } from "../Choosen Song/styles";
+
 const ArtistAlbums = () => {
     const [activePanel, setActivePanel] = useState(null);
   const togglePanel = (panel) => setActivePanel(prev => (prev === panel ? null : panel));
@@ -27,35 +26,34 @@ const ArtistAlbums = () => {
   return (
     <div>
       <Header />
-      
-      <div className="main_section">
-        <div className="playlist_section">
-          <div className="main_library-header">
+      <ArtistAlbumsMainSection>
+        <ArtistAlbumsPlaylistSection>
+          <ArtistAlbumsMainLibraryHeader>
                 <p>Tu biblioteca</p>
-                <div className="main_library-create">
-                    <button className="create_button"><img className="create_button-icon" src={mas} alt=""/>Crear</button>
-                    <img className="main_library_expand" src={expandir} alt=""/>
-                </div>                
-            </div>
-      <div className="main_library-buttons">
-        <button className="main_library-buttons-close"><img className="close-img" src={close} alt="logo para cerrar"/></button>
-        <button className={`main_library-buttons-choose ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</button>
-        <button className={`main_library-buttons-choose ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</button>
-      </div>
+                <ArtistAlbumsMainLibraryCreate>
+                    <ArtistAlbumsMainCreateButton><img className="create_button-icon" src={mas} alt=""/>Crear</ArtistAlbumsMainCreateButton>
+                    <ArtistAlbumsMainLibraryExpand src={expandir} alt=""/>
+                </ArtistAlbumsMainLibraryCreate>                
+            </ArtistAlbumsMainLibraryHeader>
+      <ArtistAlbumsMainLibraryButtons>
+        <ChoosenMainLibraryButtonClose><img className="close-img" src={close} alt="logo para cerrar"/></ChoosenMainLibraryButtonClose>
+        <ArtistAlbumsMainLibraryButtonChoose className={` ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</ArtistAlbumsMainLibraryButtonChoose>
+        <ArtistAlbumsMainLibraryButtonChoose className={` ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</ArtistAlbumsMainLibraryButtonChoose>
+      </ArtistAlbumsMainLibraryButtons>
             {activePanel === 'artists' && (
-              <div className="main_library-panel">
+              <ArtistAlbumsMainLibraryPanel>
                 <ArtistList />
-              </div>
+              </ArtistAlbumsMainLibraryPanel>
             )}
             {activePanel === 'playlists' && (
-              <div className="main_library-panel">
+              <ArtistAlbumsMainLibraryPanel>
                 <PlaylistList onToggleSection={toggleSection} />
-              </div>
+              </ArtistAlbumsMainLibraryPanel>
             )}
 
-        </div>
+        </ArtistAlbumsPlaylistSection>
           <ArtistView />
-      </div>
+      </ArtistAlbumsMainSection>
     </div>
   );
 }

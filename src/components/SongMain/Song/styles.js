@@ -1,4 +1,6 @@
-.song{
+import styled from "styled-components";
+
+const SongSection = styled.section `
     display: grid;
     grid-template-columns: 10rem 1.2fr 1fr 1fr 0.7fr 0.7fr;
     align-items: center;
@@ -7,9 +9,9 @@
     border-bottom: 1px solid #353535;
     box-sizing: border-box;
     gap: 20px;
-}
+`;
 
-.song_image_container {
+const SongImageContainer = styled.div `
     width: 8rem;
     height: 8rem;
     display: flex;
@@ -18,16 +20,15 @@
     background-color: #282828;
     border-radius: 5px;
     overflow: hidden;
-}
-
-.song_image{
+`;
+const SongImage = styled.img `
     width: 100%;
     height: 100%;
     border-radius: 5px;
     object-fit: cover;
-}
+`;
 
-.song_image_placeholder {
+const SongImagePlaceHolder = styled.div `
     width: 100%;
     height: 100%;
     display: flex;
@@ -39,39 +40,50 @@
     text-align: center;
     padding: 10px;
     box-sizing: border-box;
-}
+`;
 
-.song_title{
+const SongTitle = styled.h2 `
     font-size: 1.5rem;
-    font-weight: 400;
-    color: #FFFFFF;
+    font-weight: ${props => props.theme.fontsWeights.regular};
+    color: ${props => props.theme.colors.white};
     margin: 0;
-}
-.song_artist, .song_album, .song_duration{
+`;
+
+const SongArtist = styled.p `
     font-size: 1rem;
-    color: #ffffff;
+    color: ${props => props.theme.colors.white};
     margin: 0;
-}
-.song_add{
+`;
+
+const SongAlbum = styled.p `
+    font-size: 1rem;
+    color: ${props => props.theme.colors.white};
+    margin: 0;
+`;
+
+const SongDuration = styled.p `
+    font-size: 1rem;
+    color: ${props => props.theme.colors.white};
+    margin: 0;
+`;
+
+const SongAddContainer = styled.div `
+    position: relative;
+    display: inline-block;
+    width: fit-content;
+`;
+const SongAddButton = styled.button `
     background-color: transparent;
     border: none;
     cursor: pointer;
-}
-.add_button{
+`;
+const AddButtonImage = styled.img `
     width: 20px;
     height: 20px;
-}
-.song_add-container {
-    position: relative; /* ¡CLAVE! Permite que el tooltip flote en relación a este DIV. */
-    display: inline-block;
-    width: fit-content;
-}
+`;
 
-/*
- * 2. Estilos y Ocultamiento del Tooltip
- */
-.tooltip-text {
-    /* Posicionamiento Flotante */
+const TooltipText = styled.span `
+     /* Posicionamiento Flotante */
     position: absolute;
     z-index: 10; /* Asegura que flote por encima de otros elementos */
 
@@ -93,13 +105,23 @@
     visibility: hidden;
     opacity: 0;
     transition: opacity 0.3s; /* Transición suave para la aparición */
-}
-
-/*
- * 3. Aparición al Pasar el Ratón
- * Cuando el ratón está sobre el contenedor, el texto del tooltip se hace visible.
- */
-.song_add-container:hover .tooltip-text {
+    &:hover {
     visibility: visible;
     opacity: 1;
+    }
+`;
+
+export {
+    SongSection,
+    SongImageContainer,
+    SongImage,
+    SongImagePlaceHolder,
+    SongTitle,
+    SongArtist,
+    SongAlbum,
+    SongDuration,
+    SongAddContainer,
+    SongAddButton,
+    AddButtonImage,
+    TooltipText
 }

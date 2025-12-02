@@ -3,12 +3,12 @@ import ArtistList from "../ArtistList";
 import PlaylistList from "../PlaylistList";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './styles.css';
 //Importar iconos
 import mas from '../../Assets/mas.png';
 import expandir from '../../Assets/expandir.png';
 import close from '../../Assets/x.png';
 import play from '../../Assets/play.png';
+import { ChooseMainCreateButton, ChooseMainLibraryExpand, ChoosenMainLibraryButtonChoose, ChoosenMainLibraryButtonClose, ChoosenMainLibraryButtons, ChoosenMainLibraryCreate, ChoosenMainLibraryHeader, ChoosenMainLibraryPanel, ChoosenMainSection, ChoosenPlaylistSection, ChoosenSongActionButton, ChoosenSongDetailActions, ChoosenSongDetailAlbum, ChoosenSongDetailArtist, ChoosenSongDetailContainer, ChoosenSongDetailDuration, ChoosenSongDetailHeader, ChoosenSongDetailImage, ChoosenSongDetailInfo, ChoosenSongDetailTitle } from "./styles";
 
 const ChoosenSong = () => {
     const location = useLocation();
@@ -57,38 +57,37 @@ const ChoosenSong = () => {
     return (
         <div>
             <Header />
-            <div className="main_section">
-                <div className="playlist_section">
-                    <div className="main_library-header">
+            <ChoosenMainSection>
+                <ChoosenPlaylistSection>
+                    <ChoosenMainLibraryHeader>
                         <p>Tu biblioteca</p>
-                        <div className="main_library-create">
-                            <button className="create_button"><img className="create_button-icon" src={mas} alt=""/>Crear</button>
-                            <img className="main_library_expand" src={expandir} alt=""/>
-                        </div>                
-                    </div>
-                    <div className="main_library-buttons">
-                        <button className="main_library-buttons-close"><img className="close-img" src={close} alt="logo para cerrar"/></button>
-                        <button className={`main_library-buttons-choose ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</button>
-                        <button className={`main_library-buttons-choose ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</button>
-                    </div>
+                        <ChoosenMainLibraryCreate>
+                            <ChooseMainCreateButton><img className="create_button-icon" src={mas} alt=""/>Crear</ChooseMainCreateButton>
+                            <ChooseMainLibraryExpand src={expandir} alt=""/>
+                        </ChoosenMainLibraryCreate>                
+                    </ChoosenMainLibraryHeader>
+                    <ChoosenMainLibraryButtons>
+                        <ChoosenMainLibraryButtonClose><img className="close-img" src={close} alt="logo para cerrar"/></ChoosenMainLibraryButtonClose>
+                        <ChoosenMainLibraryButtonChoose className={` ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</ChoosenMainLibraryButtonChoose>
+                        <ChoosenMainLibraryButtonChoose className={` ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</ChoosenMainLibraryButtonChoose>
+                    </ChoosenMainLibraryButtons>
                     {activePanel === 'artists' && (
-                        <div className="main_library-panel">
+                        <ChoosenMainLibraryPanel>
                             <ArtistList />
-                        </div>
+                        </ChoosenMainLibraryPanel>
                     )}
                     {activePanel === 'playlists' && (
-                        <div className="main_library-panel">
+                        <ChoosenMainLibraryPanel>
                             <PlaylistList />
-                        </div>
+                        </ChoosenMainLibraryPanel>
                     )}
-                </div>
+                </ChoosenPlaylistSection>
 
                 {/* Mostrar canción elegida */}
-                <div className="song_detail_container">
-                    <div className="song_detail_header">
+                <ChoosenSongDetailContainer>
+                    <ChoosenSongDetailHeader>
                         {(song.strTrackThumb || song.strAlbumThumb) && (
-                            <img 
-                                className="song_detail_image" 
+                            <ChoosenSongDetailImage 
                                 src={song.strTrackThumb || song.strAlbumThumb} 
                                 alt={song.strTrack}
                                 onError={(e) => {
@@ -97,29 +96,29 @@ const ChoosenSong = () => {
                                 }}
                             />
                         )}
-                        <div className="song_detail_info">
-                            <h2>{song.strTrack}</h2>
-                            <p className="song_detail_artist">{song.strArtist}</p>
-                            <p className="song_detail_album">Álbum: {song.strAlbum}</p>
-                            <p className="song_detail_duration">Duración: {formatDuration(song.intDuration)}</p>
-                        </div>
-                    </div>
+                        <ChoosenSongDetailInfo>
+                            <ChoosenSongDetailTitle>{song.strTrack}</ChoosenSongDetailTitle>
+                            <ChoosenSongDetailArtist>{song.strArtist}</ChoosenSongDetailArtist>
+                            <ChoosenSongDetailAlbum>Álbum: {song.strAlbum}</ChoosenSongDetailAlbum>
+                            <ChoosenSongDetailDuration>Duración: {formatDuration(song.intDuration)}</ChoosenSongDetailDuration>
+                        </ChoosenSongDetailInfo>
+                    </ChoosenSongDetailHeader>
 
                     {/* Botones de acción */}
-                    <div className="song_detail_actions">
-                        <button className="action_button play_button" title="Reproducir">
+                    <ChoosenSongDetailActions>
+                        <ChoosenSongActionButton className="play_button" title="Reproducir">
                             <img src={play} alt="Reproducir" />
-                        </button>
-                        <button 
-                            className={`action_button add_button ${isSaved ? 'saved' : ''}`}
+                        </ChoosenSongActionButton>
+                        <ChoosenSongActionButton 
+                            className={`add_button ${isSaved ? 'saved' : ''}`}
                             onClick={handleAddToSearchResults}
                             title={isSaved ? "Guardada" : "Agregar a Búsqueda"}
                         >
                             {isSaved ? '✓' : '+'}
-                        </button>
-                    </div>
-                </div>
-            </div>
+                        </ChoosenSongActionButton>
+                    </ChoosenSongDetailActions>
+                </ChoosenSongDetailContainer>
+            </ChoosenMainSection>
         </div>
     );
 }

@@ -1,11 +1,11 @@
 import React from "react";
-import "./styles.css";
+import {ArtistListArtistImg, ArtistListArtistName } from "./styles";
 
 const Artist = ({ imgSrc, name}) => {
     return (
         <>
-            <img className="main_library-artist-img" src={imgSrc} alt={name}/>
-            <p className="main_library-artist-name">{name}</p>
+            <ArtistListArtistImg src={imgSrc} alt={name}/>
+            <ArtistListArtistName>{name}</ArtistListArtistName>
         </>
     );
 }

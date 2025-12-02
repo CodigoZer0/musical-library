@@ -1,4 +1,6 @@
-.songs_main{
+import styled from "styled-components";
+
+const SongsMainContainer = styled.div`
     background-color: #121212;
     width: 100%;
     height: 90%;
@@ -11,5 +13,6 @@
     gap: 20px;
     box-sizing: border-box;
     padding: 0px 10px;
-    
-}
+    `;
+
+export { SongsMainContainer };    

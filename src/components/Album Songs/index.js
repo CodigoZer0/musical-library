@@ -4,14 +4,11 @@ import PlaylistList from "../PlaylistList";
 import AlbumSongsList from "./AlbumSongsList";
 import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './styles.css';
-//Importar imagenes de las canciones
-//Importar imagenes de los artistas
-
 //Importar iconos
 import mas from '../../Assets/mas.png';
 import expandir from '../../Assets/expandir.png';
 import close from '../../Assets/x.png';
+import { AlbumSongsAlbumArtistName, AlbumSongsAlbumCoverImg, AlbumSongsAlbumHeaderContent, AlbumSongsAlbumHeaderInfo, AlbumSongsAlbumHeaderSection, AlbumSongsAlbumInfoHeader, AlbumSongsAlbumView, AlbumSongsAlbumYearInfo, AlbumSongsMainCreateButton, AlbumSongsMainLibraryButtonChoose, AlbumSongsMainLibraryButtonClose, AlbumSongsMainLibraryButtons, AlbumSongsMainLibraryCreate, AlbumSongsMainLibraryExpand, AlbumSongsMainLibraryHeader, AlbumSongsMainLibraryPanel, AlbumSongsMainSection, AlbumSongsPlaylistSection } from "./styles";
 
 const AlbumSongs = () => {
     const location = useLocation();
@@ -28,51 +25,51 @@ const AlbumSongs = () => {
         <div>
             <Header />
             
-            <div className="main_section">
-                <div className="playlist_section">
-                    <div className="main_library-header">
+            <AlbumSongsMainSection>
+                <AlbumSongsPlaylistSection>
+                    <AlbumSongsMainLibraryHeader>
                         <p>Tu biblioteca</p>
-                        <div className="main_library-create">
-                            <button className="create_button"><img className="create_button-icon" src={mas} alt=""/>Crear</button>
-                            <img className="main_library_expand" src={expandir} alt=""/>
-                        </div>                
-                    </div>
-                    <div className="main_library-buttons">
-                        <button className="main_library-buttons-close"><img className="close-img" src={close} alt="logo para cerrar"/></button>
-                        <button className={`main_library-buttons-choose ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</button>
-                        <button className={`main_library-buttons-choose ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</button>
-                    </div>
+                        <AlbumSongsMainLibraryCreate>
+                            <AlbumSongsMainCreateButton><img className="create_button-icon" src={mas} alt=""/>Crear</AlbumSongsMainCreateButton>
+                            <AlbumSongsMainLibraryExpand src={expandir} alt=""/>
+                        </AlbumSongsMainLibraryCreate>                
+                    </AlbumSongsMainLibraryHeader>
+                    <AlbumSongsMainLibraryButtons>
+                        <AlbumSongsMainLibraryButtonClose><img className="close-img" src={close} alt="logo para cerrar"/></AlbumSongsMainLibraryButtonClose>
+                        <AlbumSongsMainLibraryButtonChoose className={` ${activePanel === 'artists' ? 'is-active' : ''}`} onClick={() => togglePanel('artists')}>Artistas</AlbumSongsMainLibraryButtonChoose>
+                        <AlbumSongsMainLibraryButtonChoose className={` ${activePanel === 'playlists' ? 'is-active' : ''}`} onClick={() => togglePanel('playlists')}>Playlists</AlbumSongsMainLibraryButtonChoose>
+                    </AlbumSongsMainLibraryButtons>
                     {activePanel === 'artists' && (
-                        <div className="main_library-panel">
+                        <AlbumSongsMainLibraryPanel>
                             <ArtistList />
-                        </div>
+                        </AlbumSongsMainLibraryPanel>
                     )}
                     {activePanel === 'playlists' && (
-                        <div className="main_library-panel">
+                        <AlbumSongsMainLibraryPanel>
                             <PlaylistList />
-                        </div>
+                        </AlbumSongsMainLibraryPanel>
                     )}
-                </div>
+                </AlbumSongsPlaylistSection>
 
                 {/* Mostrar información del álbum y sus canciones */}
-                <article className="album_view">
-                    <div className="album_header_section">
-                        <div className="album_header_content">
+                <AlbumSongsAlbumView>
+                    <AlbumSongsAlbumHeaderSection>
+                        <AlbumSongsAlbumHeaderContent>
                             {album.strAlbumThumb && (
-                                <img className="album_cover_img" src={album.strAlbumThumb} alt={album.strAlbum} />
+                                <AlbumSongsAlbumCoverImg src={album.strAlbumThumb} alt={album.strAlbum} />
                             )}
-                            <div className="album_header_info">
-                                <h2>{album.strAlbum}</h2>
-                                <p className="album_artist_name">{album.strArtist}</p>
-                                <p className="album_year_info">Año: {album.intYearReleased}</p>
-                            </div>
-                        </div>
-                    </div>
+                            <AlbumSongsAlbumHeaderInfo>
+                                <AlbumSongsAlbumInfoHeader>{album.strAlbum}</AlbumSongsAlbumInfoHeader>
+                                <AlbumSongsAlbumArtistName>{album.strArtist}</AlbumSongsAlbumArtistName>
+                                <AlbumSongsAlbumYearInfo>Año: {album.intYearReleased}</AlbumSongsAlbumYearInfo>
+                            </AlbumSongsAlbumHeaderInfo>
+                        </AlbumSongsAlbumHeaderContent>
+                    </AlbumSongsAlbumHeaderSection>
 
                     {/* Mostrar canciones del álbum */}
                     <AlbumSongsList album={album} />
-                </article>
-            </div>
+                </AlbumSongsAlbumView>
+            </AlbumSongsMainSection>
         </div>
     );
 }

@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import './styles.css';
+
+import { AlbumListError, AlbumListHeader, AlbumListLoading, AlbumListNoSongs, AlbumListSongContainer, AlbumListSongItem, AlbumListSongsDuration, AlbumListSongsHeader, AlbumListSongsList, AlbumListSongsNumber, AlbumListSongsTitle } from './styles';
 
 const AlbumSongsList = ({ album }) => {
     const [songs, setSongs] = useState([]);
@@ -85,38 +86,38 @@ const AlbumSongsList = ({ album }) => {
     };
 
     if (loading) {
-        return <div className="album_songs_loading"><p>Cargando canciones...</p></div>;
+        return <AlbumListLoading><p>Cargando canciones...</p></AlbumListLoading>;
     }
 
     if (error) {
-        return <div className="album_songs_error"><p>⚠️ No se pudieron cargar las canciones</p></div>;
+        return <AlbumListError><p>⚠️ No se pudieron cargar las canciones</p></AlbumListError>;
     }
 
     return (
-        <div className="album_songs_container">
-            <h3>Canciones del álbum</h3>
+        <AlbumListSongContainer>
+            <AlbumListHeader>Canciones del álbum</AlbumListHeader>
             {songs && songs.length > 0 ? (
-                <div className="songs_list">
-                    <div className="songs_header">
-                        <p className="song_number">#</p>
-                        <p className="song_title">Canción</p>
-                        <p className="song_duration">Duración</p>
-                    </div>
+                <AlbumListSongsList>
+                    <AlbumListSongsHeader>
+                        <AlbumListSongsNumber>#</AlbumListSongsNumber>
+                        <AlbumListSongsTitle>Canción</AlbumListSongsTitle>
+                        <AlbumListSongsDuration>Duración</AlbumListSongsDuration>
+                    </AlbumListSongsHeader>
                     {songs.map((song, index) => (
-                        <div key={song.idTrack || index} className="song_item" onClick={() => handleSongClick(song)}>
-                            <p className="song_number">{index + 1}</p>
-                            <p className="song_title">{song.strTrack || 'N/A'}</p>
-                            <p className="song_duration">
+                        <AlbumListSongItem key={song.idTrack || index} onClick={() => handleSongClick(song)}>
+                            <AlbumListSongsNumber>{index + 1}</AlbumListSongsNumber>
+                            <AlbumListSongsTitle>{song.strTrack || 'N/A'}</AlbumListSongsTitle>
+                            <AlbumListSongsDuration>
                                 {song.intDuration ? Math.floor(song.intDuration / 1000 / 60) + ':' + 
                                  (Math.floor(song.intDuration / 1000) % 60).toString().padStart(2, '0') : 'N/A'}
-                            </p>
-                        </div>
+                            </AlbumListSongsDuration>
+                        </AlbumListSongItem>
                     ))}
-                </div>
+                </AlbumListSongsList>
             ) : (
-                <p className="no_songs">No hay canciones disponibles para este álbum</p>
+                <AlbumListNoSongs>No hay canciones disponibles para este álbum</AlbumListNoSongs>
             )}
-        </div>
+        </AlbumListSongContainer>
     );
 };
 

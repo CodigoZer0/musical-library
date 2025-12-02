@@ -1,6 +1,4 @@
-import React from 'react';
-import './styles.css';
-import { Link } from 'react-router-dom';
+import { PlaylistListContainer, PlaylistListItem, PlaylistListName, PlaylistListTitle, PlaylistListUl } from './styles';
 
 const PlaylistList = ({ playlists = [], onToggleSection }) => {
   // cada playlist tiene un target para controlar qué sección abrir/toggle
@@ -12,17 +10,17 @@ const PlaylistList = ({ playlists = [], onToggleSection }) => {
   const list = playlists.length ? playlists : fallback;
 
   return (
-    <div className="playlist_list">
-      <h4>Playlists</h4>
-      <ul>
+    <PlaylistListContainer>
+      <PlaylistListTitle>Playlists</PlaylistListTitle>
+      <PlaylistListUl>
         {list.map(p => (
-          <li key={p.id} className="playlist_item">
+          <PlaylistListItem key={p.id} >
             {/* al clicar el nombre togglea la sección indicada (library | search) */}
-            <Link  className="playlist_name" to={p.target}>{p.name}</Link>
-          </li>
+            <PlaylistListName to={p.target}>{p.name}</PlaylistListName>
+          </PlaylistListItem>
         ))}
-      </ul>
-    </div>
+      </PlaylistListUl>
+    </PlaylistListContainer>
   )
 }
 
