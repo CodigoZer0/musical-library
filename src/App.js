@@ -5,12 +5,16 @@ import ArtistAlbums from "./components/Artist Albums";
 import AlbumSongs from "./components/Album Songs";
 import ChoosenSong from "./components/Choosen Song";
 import YourPlaylist from "./components/YourPlaylist";
+import { ThemeProvider } from "styled-components";
+import Theme from "./theme";
+import GlobalStyles from "./theme/GlobalStyles";
 
 function App() {
   
 
   return (
-    <>
+    <ThemeProvider theme={Theme}>
+      <GlobalStyles />
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/artist/:artistId" element={<ArtistAlbums />} />
@@ -18,7 +22,7 @@ function App() {
         <Route path="/song" element={<ChoosenSong />} />
         <Route path="/your_playlist" element={<YourPlaylist />} />
       </Routes>
-    </>
+    </ThemeProvider>
   );
 }
 

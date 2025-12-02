@@ -1,8 +1,9 @@
-import './styles.css';
 import lupa from '../../../Assets/lupa.png';
 import useFetch from '../../../hooks/useFetch';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { SearcherButton, SearcherHomeSearch, SearcherHomeSearchForm, SearcherImg, SearcherInput } from './styles';
+
 
 const Searcher = () => {
     const [displayValue, setDisplayValue] = useState('');
@@ -48,20 +49,20 @@ const Searcher = () => {
 
     return (
         <>
-            <article className="header_homesearch"/>
-            <form className="header_homesearch-search" onSubmit={handleSubmit}>
-                <input 
+            <SearcherHomeSearch>
+            <SearcherHomeSearchForm onSubmit={handleSubmit}>
+                <SearcherInput 
                     type="text" 
-                    name="artist" 
-                    className="header_input" 
+                    name="artist"  
                     placeholder="¿Qué deseas reproducir?" 
                     value={displayValue}
                     onChange={handleInputChange}
                 />
-                <button type="submit" id='search-button'>
-                    <img className="header_img" src={lupa} alt="buscar"/> 
-                </button>
-            </form>
+                <SearcherButton type="submit" >
+                    <SearcherImg src={lupa} alt="buscar"/> 
+                </SearcherButton>
+            </SearcherHomeSearchForm>
+            </SearcherHomeSearch>
         </>
     );
 };

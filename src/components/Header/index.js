@@ -1,14 +1,13 @@
-
 import logo from './../../Assets/logo.png';
-import './styles.css';
 import Searcher from './Searcher/index.js';
+import { HeaderContainer, HeaderImg, HeaderTitle } from './styles.js';
 const Header = () => {
         return(
-            <header className="header">
-                <h1 className="header_title">Biblioteca Musical</h1>
-                <img className="header_img" src={logo} alt="Logo de la Biblioteca Musical" />
+            <HeaderContainer>
+                <HeaderTitle>Biblioteca Musical</HeaderTitle>
+                <HeaderImg src={logo} alt="Logo de la Biblioteca Musical" />
                 <Searcher />
-            </header>
+            </HeaderContainer>
         )
 
 }

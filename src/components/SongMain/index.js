@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MusicLibrary from "./MusicLibrary";
 import SearchResults from "./SearchResults";
-import "./styles.css"
+import { SongsMainContainer } from "./styles";
 
 const SongMain = ({ showLibrary = true, showSearchResults = true, onToggleSaved }) => {
   const [savedSongs, setSavedSongs] = useState([]);
@@ -56,7 +56,7 @@ const SongMain = ({ showLibrary = true, showSearchResults = true, onToggleSaved 
   };
 
   return (
-    <div className="songs_main">
+    <SongsMainContainer>
       {showLibrary && (
         <MusicLibrary songs={savedSongs} onToggleSaved={handleToggleSaved} />
       )}
@@ -64,7 +64,7 @@ const SongMain = ({ showLibrary = true, showSearchResults = true, onToggleSaved 
       {showSearchResults && (
         <SearchResults songs={songs} savedSongs={savedSongs} onToggleSaved={handleToggleSaved} />
       )}
-    </div>
+    </SongsMainContainer>
   );
 }
 
