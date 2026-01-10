@@ -13,23 +13,27 @@ const MusicLibrary = ({ songs, onToggleSaved }) => {
             <p>Duracion</p>
           </LibrarySongsTopic>
           <LibrarySongsContainer>
-            {songs.map ((song) => {
+            {songs && songs.length > 0 ? (
+              songs.map ((song) => {
                 const { key, image, title, artist, album, duration } = song;
                 return (
                   <Song
-                    key={key}
+                    key={key || song.idTrack}
                     image={image}
                     title={title}
                     artist={artist}
                     album={album}
                     duration={duration}
-                    /* ocultar y deshabilitar el botón en la biblioteca */
-                    hideControls={true}
-                    /* onToggleSaved sigue disponible si lo necesitas para otra lógica */
+                    /* Mostrar botón de eliminar */
+                    hideControls={false}
+                    isDelete={true}
                     onToggleSaved={() => onToggleSaved && onToggleSaved(song)}
                   />
                 );
-            })}
+              })
+            ) : (
+              <p className="no_songs">No hay canciones guardadas</p>
+            )}
           </LibrarySongsContainer>
         </>
     )

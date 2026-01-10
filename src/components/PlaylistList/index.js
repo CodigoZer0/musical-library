@@ -3,7 +3,7 @@ import { PlaylistListContainer, PlaylistListItem, PlaylistListName, PlaylistList
 const PlaylistList = ({ playlists = [], onToggleSection }) => {
   // cada playlist tiene un target para controlar qué sección abrir/toggle
   const fallback = [
-    { id: 'p1', name: 'Canciones guardadas', target: '/your_playlist' },
+    { id: 'p1', name: 'Canciones guardadas (0)', target: '/your_playlist' },
     { id: 'p2', name: 'Busquedas recientes', target: '/' },
     
   ];

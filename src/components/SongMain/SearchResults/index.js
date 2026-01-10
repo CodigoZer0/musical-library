@@ -40,6 +40,7 @@ const SearchResults = ({ songs, savedSongs = [], onToggleSaved }) => {
     const displaySongs = recentSearches.length > 0 ? recentSearches : songs;
 
     const handleAddSong = (song) => {
+        console.log('SearchResults: handleAddSong llamado con:', song);
         // Normalizar el objeto song para asegurar que tiene todas las propiedades necesarias
         const normalizedSong = {
             key: song.key || song.idTrack,
@@ -51,6 +52,8 @@ const SearchResults = ({ songs, savedSongs = [], onToggleSaved }) => {
             duration: song.duration,
             added: true
         };
+        console.log('SearchResults: Canción normalizada:', normalizedSong);
+        console.log('SearchResults: Canciones guardadas antes:', savedSongs);
         onToggleSaved(normalizedSong);
     };
 
