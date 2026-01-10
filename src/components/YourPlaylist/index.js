@@ -3,6 +3,7 @@ import ArtistList from "../ArtistList";
 import PlaylistList from "../PlaylistList";
 import SongMain from "../SongMain/";
 import { useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import mas from '../../Assets/mas.png';
 import expandir from '../../Assets/expandir.png';
@@ -11,8 +12,23 @@ import { YourPlaylistMainCreateButton, YourPlaylistMainLibraryButtonChoose, Your
 
 const YourPlaylist = ({ onToggleSection }) => {
     const [activePanel, setActivePanel] = useState(null);
+    const savedSongs = useSelector(state => state.modify_playlist);
+    
+    // DEBUG: Log cada vez que se abre YourPlaylist o cambian las canciones
+    useEffect(() => {
+        console.log('=== YourPlaylist montado/actualizado ===');
+        console.log('Canciones guardadas en Redux:', savedSongs);
+        console.log('Total de canciones:', savedSongs.length);
+        console.log('localStorage userSavedSongs:', JSON.parse(localStorage.getItem('userSavedSongs') || '[]'));
+    }, [savedSongs]);
     
     const togglePanel = (panel) => setActivePanel(prev => (prev === panel ? null : panel));
+
+    // Crear lista de playlists con las canciones guardadas
+    const playlists = [
+      { id: 'p1', name: `Canciones guardadas (${savedSongs.length})`, target: '/your_playlist' },
+      { id: 'p2', name: 'Busquedas recientes', target: '/' },
+    ];
 
     return (
       <div>
@@ -38,12 +54,12 @@ const YourPlaylist = ({ onToggleSection }) => {
                 )}
                 {activePanel === 'playlists' && (
                   <YourPlaylistMainLibraryPanel>
-                    <PlaylistList onToggleSection={onToggleSection} />
+                    <PlaylistList playlists={playlists} onToggleSection={onToggleSection} />
                   </YourPlaylistMainLibraryPanel>
                 )}
             </YourPlaylistPlaylistSection>
             <YourPlayListSongMain>
-              <SongMain showLibrary={true} showSearchResults={false} />
+              <SongMain showLibrary={true} showSearchResults={false} storageKey="userSavedSongs" />
             </YourPlayListSongMain>
         </YourPlaylistMainSection> 
       </div>

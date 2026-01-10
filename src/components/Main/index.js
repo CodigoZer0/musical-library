@@ -12,13 +12,6 @@ import { MainContainer, MainLibraryButtons, MainLibraryButtonsChoose, MainLibrar
 const Main = ({ onToggleSection }) => {
   const [activePanel, setActivePanel] = useState(null);
   const togglePanel = (panel) => setActivePanel(prev => (prev === panel ? null : panel));
-  
-  // Usar una clave específica para Main
-  const handleSaveSong = (song) => {
-    const savedSongs = JSON.parse(localStorage.getItem('mainSavedSongs') || '[]');
-    savedSongs.push(song);
-    localStorage.setItem('mainSavedSongs', JSON.stringify(savedSongs));
-  };
 
   return (
     <div>
@@ -51,8 +44,7 @@ const Main = ({ onToggleSection }) => {
               <SongMain 
                 showLibrary={false} 
                 showSearchResults={true}
-                onSaveSong={handleSaveSong}
-                storageKey="mainSavedSongs"
+                storageKey="userSavedSongs"
               />
       </MainContainer> 
     </div>

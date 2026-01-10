@@ -2,7 +2,7 @@ import add from './../../../Assets/boton-agregar-hover.png'
 import { useState } from 'react';
 import { AddButtonImage, SongAddButton, SongAddContainer, SongAlbum, SongArtist, SongDuration, SongImage, SongImageContainer, SongImagePlaceHolder, SongSection, SongTitle, TooltipText } from './styles';
 
-const Song = ({ key, image, title, artist, album, duration, added, onToggleSaved, hideControls }) => {
+const Song = ({ key, image, title, artist, album, duration, added, onToggleSaved, hideControls, isDelete = false }) => {
     const [imageError, setImageError] = useState(false);
 
     const handleImageError = () => {
@@ -30,9 +30,9 @@ const Song = ({ key, image, title, artist, album, duration, added, onToggleSaved
             {!hideControls && (
                 <SongAddContainer>
                     <SongAddButton onClick={onToggleSaved} type="button">
-                        <AddButtonImage src={add} alt='Add' />
+                        <AddButtonImage src={add} alt={isDelete ? 'Eliminar' : 'Agregar'} />
                     </SongAddButton>
-                    <TooltipText>Agregar a la lista de reproducción</TooltipText>
+                    <TooltipText>{isDelete ? 'Eliminar de la biblioteca' : 'Agregar a la lista de reproducción'}</TooltipText>
                 </SongAddContainer>
             )}
         </SongSection>

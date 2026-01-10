@@ -1,56 +1,48 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
 import MusicLibrary from "./MusicLibrary";
 import SearchResults from "./SearchResults";
 import { SongsMainContainer } from "./styles";
+import { addSong, removeSong, loadSavedSongs } from "../../actions";
 
-const SongMain = ({ showLibrary = true, showSearchResults = true, onToggleSaved }) => {
-  const [savedSongs, setSavedSongs] = useState([]);
+const SongMain = ({ showLibrary = true, showSearchResults = true, onToggleSaved, storageKey = 'userSavedSongs' }) => {
+  const dispatch = useDispatch();
+  const savedSongs = useSelector(state => state.modify_playlist);
 
-  // Cargar canciones guardadas al montar y cuando vuelva a esta ruta
-  useEffect(() => {
-    const loadSavedSongs = () => {
-      const stored = JSON.parse(localStorage.getItem('userSavedSongs') || '[]');
-      setSavedSongs(stored);
-    };
-
-    loadSavedSongs();
-
-    // Escuchar cambios en localStorage desde otras ventanas/tabs
-    const handleStorageChange = (e) => {
-      if (e.key === 'userSavedSongs') {
-        loadSavedSongs();
-      }
-    };
-
-    window.addEventListener('storage', handleStorageChange);
-    return () => window.removeEventListener('storage', handleStorageChange);
-  }, []);
-
-  // También recargar cuando el componente vuelva a enfocarse
-  useEffect(() => {
-    const handleFocus = () => {
-      const stored = JSON.parse(localStorage.getItem('userSavedSongs') || '[]');
-      setSavedSongs(stored);
-    };
-
-    window.addEventListener('focus', handleFocus);
-    return () => window.removeEventListener('focus', handleFocus);
-  }, []);
+  console.log('SongMain render - savedSongs:', savedSongs, 'showLibrary:', showLibrary, 'showSearchResults:', showSearchResults);
 
   // Canción vacía para SearchResults si no hay datos estáticos
   const songs = [];
 
-  // Guardar cuando cambien las canciones
+  // Agregar o remover canción - verificar contra localStorage
   const handleToggleSaved = (song) => {
-    setSavedSongs(prev => {
-      const exists = prev.some(s => s.key === song.key || s.idTrack === song.idTrack);
-      const updated = exists 
-        ? prev.filter(s => s.key !== song.key && s.idTrack !== song.idTrack)
-        : [...prev, song];
+    console.log('=== SongMain: handleToggleSaved ===');
+    console.log('Canción a guardar/remover:', song);
+    
+    // Leer directamente de localStorage para tener la verdad
+    const storedSongs = JSON.parse(localStorage.getItem(storageKey) || '[]');
+    console.log('Canciones en localStorage:', storedSongs);
+    
+    const exists = storedSongs.some(
+      s => s.key === song.key || s.idTrack === song.idTrack || s.id === song.id
+    );
+    
+    console.log('¿Ya existe en localStorage?:', exists);
+    
+    if (exists) {
+      console.log('Despachando REMOVE_SONG');
+      dispatch(removeSong(song));
+    } else {
+      console.log('Despachando ADD_SONG');
+      dispatch(addSong(song));
       
-      localStorage.setItem('userSavedSongs', JSON.stringify(updated));
-      return updated;
-    });
+      // Después de agregar, actualizar Redux con el nuevo estado
+      setTimeout(() => {
+        const updated = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        console.log('Actualizando Redux con:', updated);
+        dispatch(loadSavedSongs(updated));
+      }, 100);
+    }
     
     if (onToggleSaved) onToggleSaved(song);
   };
