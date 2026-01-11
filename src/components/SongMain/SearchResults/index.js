@@ -43,8 +43,8 @@ const SearchResults = ({ songs, savedSongs = [], onToggleSaved }) => {
         console.log('SearchResults: handleAddSong llamado con:', song);
         // Normalizar el objeto song para asegurar que tiene todas las propiedades necesarias
         const normalizedSong = {
-            key: song.key || song.idTrack,
-            idTrack: song.idTrack || song.key,
+            key: song.key || song.idTrack || `${song.title}-${song.artist}`,
+            idTrack: song.idTrack || song.key || `${song.title}-${song.artist}`,
             image: song.image,
             title: song.title,
             artist: song.artist,

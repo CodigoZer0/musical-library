@@ -8,7 +8,7 @@ export const addSong = (song) => {
 export const removeSong = (song) => {
     return {
         type: 'REMOVE_SONG',
-        payload: song.key || song.idTrack || song.id
+        payload: song
     }
 }
 
